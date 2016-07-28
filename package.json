@@ -1,6 +1,6 @@
 {
   "name": "dictionaryjs",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A simple dictionary wrapper for JavaScript objects providing hashmap functionality and helpful methods. Methods include: for get, set, getDefault, remove, has, size, forEach, asyncForEach and setAsyncInterval.",
   "main": "dictionaryjs",
   "dependencies": {},
@@ -19,7 +19,6 @@
     "hashmap",
     "key-value"
   ],
-  "readmeFilename": "readme.md",
   "bugs": {
     "url": "https://github.com/phanxgames/dictionaryjs/issues"
   }
