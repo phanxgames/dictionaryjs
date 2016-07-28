@@ -18,7 +18,7 @@ A simple dictionary wrapper for JavaScript objects providing associative array f
 * Improved the forEach loop to not use a seperate array for keys.
 * Added Empty and asyncEmpty to quickly remove all entries from the dictionary.
 
-#### 0.0.9 & 0.0.10
+#### 0.0.9 - 0.0.11
 
 * Updated README preparing for new ES6 version.
 
