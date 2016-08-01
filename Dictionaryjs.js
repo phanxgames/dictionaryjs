@@ -2,7 +2,6 @@ function Dictionary(){
 	this.data = {};
 	this._keys = null;
 	this._invalidateKeys = false;
-	//this._interval = 100;
 }
 
 Dictionary.prototype.invalidate = function() {
@@ -71,10 +70,8 @@ Dictionary.prototype.asyncForEach = function (cb,endcb) {
 	var counter = 0;
 	var len = keys.length;
 	var data = this.data;
-	//var interval = this._interval;
 	var next = function() {
 		if (counter < len && data!=null) {
-			//setTimeout(step,interval);
 			process.nextTick(step);
 		} else {
 			if (endcb!=null) endcb();
@@ -100,11 +97,6 @@ Dictionary.prototype.asyncForEach = function (cb,endcb) {
 	step();
 };
 
-/*
-Dictionary.prototype.setAsyncInterval = function(interval) {
-	this._interval = interval;
-};
-*/
 
 Dictionary.prototype.getKeys = function() {
 	if (this._invalidateKeys || this._keys==null) {

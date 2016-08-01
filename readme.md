@@ -1,5 +1,11 @@
 A simple dictionary wrapper for JavaScript objects providing associative array functionality and helpful methods. Methods include: get, set, getDefault, remove, has, size, empty, asyncEmpty, forEach, and asyncForEach.
 
+### New ES6 Version
+
+An amazing new version is now available, taking advantage of ES6 proxy classes and generator/yield flow controls.
+See <a href="https://www.npmjs.com/package/dictionaryjs-es6">dictionaryjs-es6</a> to start using it today!
+
+
 ### Features
 
 * Get and Set entries as key/value pairs
@@ -18,27 +24,20 @@ A simple dictionary wrapper for JavaScript objects providing associative array f
 * Improved the forEach loop to not use a seperate array for keys.
 * Added Empty and asyncEmpty to quickly remove all entries from the dictionary.
 
-#### 0.0.9 - 0.0.11
+#### 0.0.9 - 0.0.12
 
-* Updated README preparing for new ES6 version.
+* Updated README announcing the new ES6 version, see <a href="https://www.npmjs.com/package/dictionaryjs-es6">dictionaryjs-es6</a>.
+
+
 
 ### install
-
-<pre>
-npm install dictionaryjs@classic
-</pre>
-
-
-### New ES6 Version
-
-A newer version that supports (and requires) ES6 is now the latest version.
-Which may be installed using:
 
 <pre>
 npm install dictionaryjs
 </pre>
 
-See the the latest version readme for more information.
+
+
 
 ## API
 
