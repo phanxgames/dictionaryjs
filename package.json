@@ -1,6 +1,6 @@
 {
   "name": "dictionaryjs",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A simple dictionary wrapper for JavaScript providing hashmap functionality and helpful methods. Methods include: for get, set, getDefault, remove, has, size, forEach, asyncForEach and setAsyncInterval.",
   "main": "dictionaryjs",
   "dependencies": {},
@@ -11,6 +11,7 @@
   },
   "keywords": [
     "dictionary",
+	"associative array",
     "async",
     "foreach",
     "remove",
