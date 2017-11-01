@@ -38,7 +38,7 @@ See branch "classic" for earlier versions of Node.JS.
 To use simply include at the top of your script:
 
 <pre>
-var Dictionary = require('dictionaryjs');
+const Dictionary = require('dictionaryjs');
 
 let dict = new Dictionary();
 </pre>
@@ -244,7 +244,7 @@ dict.values();
 
 ### Caching Keys
 
-An option in the constructor (defaults to false) allows you to have the keys cached so they are not recalculated each time you begin to iterator through the collection.
+An option in the constructor (defaults to false) allows you to have the keys cached so they are not recalculated each time you begin to iterate through the collection.
 
 First enable caching by passing true in the constructor:
 

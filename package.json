@@ -1,6 +1,6 @@
 {
   "name": "dictionaryjs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple dictionary wrapper for JavaScript providing hashmap functionality with the added benefit of accessing keys using box and dot operators!",
   "main": "Dictionary.js",
   "license": "GPL-3.0",
