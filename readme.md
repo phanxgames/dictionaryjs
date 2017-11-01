@@ -1,33 +1,19 @@
-A simple dictionary wrapper for JavaScript objects providing associative array functionality and helpful methods. Methods include: get, set, getDefault, remove, has, size, empty, asyncEmpty, forEach, and asyncForEach.
-
-### New ES6 Version
-
-An amazing new version is now available, taking advantage of ES6 proxy classes and generator/yield flow controls.
-See <a href="https://www.npmjs.com/package/dictionaryjs-es6">dictionaryjs-es6</a> to start using it today!
-
+A simple dictionary wrapper for JavaScript providing hashmap functionality with the added benefit of accessing keys using box and dot operators!
 
 ### Features
 
-* Get and Set entries as key/value pairs
-* GetDefault method with default value if value is not found
-* Remove key from dictionary
-* Get length of dictionary
-* Built-in forEach and asyncForEach loops
-* Ability to break forEach and asyncForEach loops
-* asyncForEach now has a end callback which will be called once the loop is complete
-* Empty and asyncEmpty to clear all entries from dictionary
-
-### Change Log
-
-#### 0.0.8
-
-* Improved the forEach loop to not use a seperate array for keys.
-* Added Empty and asyncEmpty to quickly remove all entries from the dictionary.
-
-#### 0.0.9 - 0.0.12
-
-* Updated README announcing the new ES6 version, see <a href="https://www.npmjs.com/package/dictionaryjs-es6">dictionaryjs-es6</a>.
-
+* Stores key/value pairs within a Associative Array like collections.
+* Use dot operator and brackets to access keys.
+* Remove key using the DELETE operator.
+* Iterator to support for..of looping.
+* Async/await support with Promises.
+* Set and Get methods for accessing keys.
+* GetDefault method with default value if value is not found.
+* Remove method to remove key from collection.
+* Size method to get total key count within collection.
+* Built-in forEach and asyncForEach methods for looping.
+* Empty and asyncEmpty to remove all entries from collection.
+* Has method checking if key is within collection.
 
 
 ### install
@@ -36,7 +22,12 @@ See <a href="https://www.npmjs.com/package/dictionaryjs-es6">dictionaryjs-es6</a
 npm install dictionaryjs
 </pre>
 
+### Requirements
 
+* ECMAScript 2016 (ES6)
+* Node.JS 6.x or later (tested on 6.11)
+
+See branch "classic" for earlier versions of Node.JS.
 
 
 ## API
@@ -48,23 +39,31 @@ To use simply include at the top of your script:
 <pre>
 var Dictionary = require('dictionaryjs');
 
-var dict = new Dictionary();
+let dict = new Dictionary();
 </pre>
 
 ### Set
 
-To store a key provide the key as a string and the value can be any data type.
+Store values to a key:
 
 <pre>
 dict.set("key",value);
+//--or--
+dict["key"] = value;
+//--or--
+dict.key = value;
 </pre>
 
 ### Get
 
-Get the value of a key.
+Get a value from a key:
 
 <pre>
 dict.get("key");
+//--or--
+dict["key"];
+//--or---
+dict.key;
 </pre>
 
 ### Get Default
@@ -76,20 +75,27 @@ dict.getDefault("key",default);
 </pre>
 
 If key is not contained within dictionary then the default value will be returned.
-Remove
 
-### Remove a key.
+
+### Remove
+
+Remove an entry by key:
 
 <pre>
 dict.remove("key");
+//--or--
+delete dict["key"];
 </pre>
+
 
 ### Size
 
-Determine how many keys are in the dictionary, returns an integer.
+Determine how many entries are in the dictionary, returns an integer.
 
 <pre>
 dict.size();
+//--or--
+dict.length;
 </pre>
 
 ### Has
@@ -106,6 +112,8 @@ Removes all dictionary entries. This method is blocking.
 
 <pre>
 dict.empty();
+//--or--
+dict.clear();
 </pre>
 
 ### Async Empty
@@ -113,17 +121,25 @@ dict.empty();
 Removes all dictionary entries. This method is non-blocking.
 
 <pre>
-dict.asyncEmpty(function() {
+dict.asyncEmpty(() => {
   //called after dictionary has been emptied
 });
+</pre>
+
+Or as a promise:
+
+<pre>
+await dict.asyncEmpty();
+//after dictionary has been emptied
 </pre>
 
 ### For Each
 
 To loop over each entry in the dictionary use:
+This method is blocking.
 
 <pre>
-dict.forEach(function(key,value) {
+dict.forEach((key,value) => {
   //returns key and value of each
 });
 </pre>
@@ -141,7 +157,7 @@ dict.forEach(function(key,value) {
 To loop over each entry in a non-blocking manner:
 
 <pre>
-dict.asyncForEach(function(key,value,next) {
+dict.asyncForEach((key,value,next) => {
   //returns key and value of each
   next();
 });
@@ -150,7 +166,7 @@ dict.asyncForEach(function(key,value,next) {
 To break and end looping:
 
 <pre>
-dict.asyncForEach(function(key,value,next) {
+dict.asyncForEach((key,value,next) => {
   if (..logic..) return false;
   next();
 });
@@ -159,83 +175,99 @@ dict.asyncForEach(function(key,value,next) {
 (Optional) You may also call a function once the asyncForEach loop is complete:
 
 <pre>
-dict.asyncForEach(function(key,value,next) {
+dict.asyncForEach((key,value,next) => {
   next();
-}, function() {
+}, () => {
   //called once loop is complete
 });
 </pre>
+
+Or as a promise:
+
+<pre>
+await dict.asyncForEach((key,value,next) => {
+  next();
+});
+//once loop is complete
+</pre>
+
+
+### Using the (for ... of) loop:
+
+Loop through all entries. This is blocking.
+
+<pre>
+for (let value of dict) {
+    console.log(value);
+}
+</pre>
+
+To loop through each key within the collection you may use the for...in loop.
+This is blocking.
+
+<pre>
+for (let key in dict) {
+    console.log(key + "=" + dict[key]);
+}
+</pre>
+
+
+
+### Entries Iterator
+
+Loop through all key and value pairs at once:
+
+<pre>
+for (let [key,value] of dict.entries()) {
+    console.log(key,value);
+}
+</pre>
+
 
 ### Get Keys
 
 Returns an array of keys:
 
 <pre>
-dict.getKeys();
+dict.keys();
 </pre>
 
-### Full Example
+### Get Values
+
+Returns an array of values:
 
 <pre>
-var Dictionary = require('dictionaryjs');
-
-var dict = new Dictionary();
-
-//Setting keys examples
-dict.set("key1","value1");
-dict.set("key2","value2");
-dict.set("1","num1");
-dict.set("2","num2");
-dict.set("3","num3");
-dict.set("4","num4");
-dict.set("obj",{test:"object"});
-dict.set("arr",[0,1,2,3]);
-
-//Delete key example
-dict.remove("2");
-dict.remove("key2");
-
-//Return length of dictionary
-console.log("Dictionary size="+dict.size());
-
-//Has key
-console.log("Dictionary contains key 5? "+dict.has(5));
-
-//Get key examples
-console.log("Get key1="+dict.get("key1"));
-
-//GetDefault example
-console.log(dict.getDefault("key3","default value, not found"));
-
-//For each looping example
-dict.forEach(function(key,value) {
-  console.log(key+"="+value);
-});
-
-//To break within the loops
-dict.forEach(function(key,value) {
-  if (key==3) return false; //breaks if key is 3
-  console.log(key+"="+value);
-});
-
-//Async for each looping example
-dict.asyncForEach(function(key,value,next) {
-  console.log(key+"="+value);
-  next();
-},function() {
-  console.log("Async loop is complete!");
-});
-
-//Async Empty
-dict.asyncEmpty(function() {
-  //dictionary should be empty
-  console.log("emptied, size:" + dict.size());
-});
+dict.values();
 </pre>
 
-## To Do
 
-* Use some kind of hashing function to store keys so non-strings may be supported.
+### Caching Keys
+
+An option in the constructor (defaults to false) allows you to have the keys cached so they are not recalculated each time you begin to iterator through the collection.
+
+First enable caching by passing true in the constructor:
+
+<pre>
+let dict = new Dictionary(true);
+</pre>
+
+Then as you interact with the collection the cache will invalidate on its own as long as you use the methods built into the class.  In other words using the dot or box operators to set or delete keys will not invalidate the key cache.
+
+<pre>
+//will invalidate cache on its own:
+dict.set("key",value);
+
+//will NOT invalidate cache on its own:
+dict["key"] = value;
+</pre>
+
+In the event you wish to still use the dot or box operators you can manually invalidate the cache yourself...
+
+<pre>
+dict["key"] = value;
+dict.invalidate();
+</pre>
+
 
 
 

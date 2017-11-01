@@ -1,8 +1,8 @@
 {
   "name": "dictionaryjs",
-  "version": "0.0.13",
-  "description": "A simple dictionary wrapper for JavaScript providing hashmap functionality and helpful methods. Methods include: for get, set, getDefault, remove, has, size, forEach, asyncForEach and setAsyncInterval.",
-  "main": "dictionaryjs",
+  "version": "1.0.0",
+  "description": "A simple dictionary wrapper for JavaScript providing hashmap functionality with the added benefit of accessing keys using box and dot operators!",
+  "main": "Dictionary.js",
   "license": "GPL-3.0",
   "dependencies": {},
   "devDependencies": {},
@@ -13,13 +13,9 @@
   "keywords": [
     "dictionary",
 	"associative array",
-    "async",
-    "foreach",
-    "remove",
-    "object",
-    "foreach",
     "hashmap",
-    "key-value"
+    "key-value",
+    "map"
   ],
   "bugs": {
     "url": "https://github.com/phanxgames/dictionaryjs/issues"
