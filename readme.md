@@ -2,6 +2,7 @@ A simple dictionary wrapper for JavaScript providing hashmap functionality with 
 
 ### Features
 
+* Typescript source-code.
 * Stores key/value pairs within a Associative Array like collections.
 * Use dot operator and brackets to access keys.
 * Remove key using the DELETE operator.

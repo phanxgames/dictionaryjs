@@ -1,6 +1,6 @@
 {
   "name": "dictionaryjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple dictionary wrapper for JavaScript providing hashmap functionality with the added benefit of accessing keys using box and dot operators!",
   "main": "Dictionary.js",
   "license": "GPL-3.0",
@@ -15,7 +15,8 @@
 	"associative array",
     "hashmap",
     "key-value",
-    "map"
+    "map",
+    "typescript"
   ],
   "bugs": {
     "url": "https://github.com/phanxgames/dictionaryjs/issues"
