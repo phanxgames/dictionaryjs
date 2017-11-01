@@ -6,7 +6,7 @@
  */
 export class Dictionary {
 
-    __private__:DictionaryInner;
+    private __private__:DictionaryInner;
 
     constructor(cacheKeys:Boolean=false) {
 
@@ -26,7 +26,7 @@ export class Dictionary {
     /**
      * @internal
      */
-    [Symbol.iterator] = function*() {
+    public [Symbol.iterator] = function*() {
         let keys = this.getKeys();//Object.keys(this);
         for (let key of keys) {
             yield this[key];
@@ -43,7 +43,7 @@ export class Dictionary {
      * </pre>
      * @returns Iterator
      */
-    entries():any {
+    public entries():any {
         let self = this;
         return {
             [Symbol.iterator]: function*() {
@@ -61,7 +61,7 @@ export class Dictionary {
      * @param {any} key
      * @returns {Boolean}
      */
-    has(key:any):Boolean {
+    public has(key:any):Boolean {
 
         if (key==null) return false;
         if (typeof key == "string" && key.indexOf("__private__") >= 0)
@@ -76,7 +76,7 @@ export class Dictionary {
      * Returns number of items in collection.
      * @returns {number} c
      */
-    size():number {
+    public size():number {
         return this.getKeys().length;
     }
 
@@ -84,14 +84,14 @@ export class Dictionary {
      * Returns number of items in collection.
      * @returns {number} c
      */
-    get length():number {
+    public get length():number {
         return this.size();
     }
 
     /**
      * Invalidates keys to recalculate.
      */
-    invalidate():void {
+    public invalidate():void {
         this.__private__.invalidateKeys = true;
     }
 
@@ -99,7 +99,7 @@ export class Dictionary {
      * @ignore
      * @alias getKeys()
      */
-    keys():Array<any> {
+    public keys():Array<any> {
         return this.getKeys();
     }
 
@@ -107,7 +107,7 @@ export class Dictionary {
      * Return array of keys
      * @returns {Array<any>} array of keys
      */
-    getKeys():Array<any> {
+    public getKeys():Array<any> {
         if (!this.__private__.cacheKeys)
             return Object.keys(this);
 
@@ -124,7 +124,7 @@ export class Dictionary {
      * Returns values within collection
      * @returns {Array<any>}
      */
-    values():Array<any> {
+    public values():Array<any> {
         let arr:Array<any> = [];
         let keys = this.getKeys();
         for (let key in keys) {
@@ -137,7 +137,7 @@ export class Dictionary {
      * Remove the key from collection.
      * @param {any} key
      */
-    remove(key:any):void {
+    public remove(key:any):void {
         this.invalidate();
         delete this[key];
     }
@@ -149,7 +149,7 @@ export class Dictionary {
      * @param {any} key - key of the key/value pair
      * @param {any} value - value of the key/value pair
      */
-    set(key:any,value:any):void {
+    public set(key:any,value:any):void {
         this.invalidate();
         this[key] = value;
     }
@@ -159,7 +159,7 @@ export class Dictionary {
      * @param {any} key
      * @returns {any} the value
      */
-    get(key:any):any {
+    public get(key:any):any {
         return this[key];
     }
 
@@ -169,7 +169,7 @@ export class Dictionary {
      * @param defaultValue - the default value
      * @returns value of key or default value
      */
-    getDefault(key:any,defaultValue:any):any {
+    public getDefault(key:any,defaultValue:any):any {
         if (this.has(key)) {
             return this[key];
         } else {
@@ -181,7 +181,7 @@ export class Dictionary {
      * Removes all keys from collection.
      * This is blocking.
      */
-    empty():void {
+    public empty():void {
         this.forEach((key:any,value:any):void => {
             this.remove(key);
         })
@@ -190,7 +190,7 @@ export class Dictionary {
     /**
      * @alias empty()
      */
-    clear():void {
+    public clear():void {
         this.empty();
     }
 
@@ -198,7 +198,7 @@ export class Dictionary {
      * Non-blocking method to remove all keys from collection.
      * @param {Function} cbComplete - cbComplete()
      */
-    asyncEmpty(cbComplete:Function=null):Promise<null> {
+    public asyncEmpty(cbComplete:Function=null):Promise<null> {
 
         return new Promise(async (resolve) => {
             await this.asyncForEach(
@@ -221,7 +221,7 @@ export class Dictionary {
      * @ignore
      * @alias each
      */
-    forEach(cb:Function):void {
+    public forEach(cb:Function):void {
         this.each(cb);
     }
 
@@ -229,7 +229,7 @@ export class Dictionary {
      * Blocking loop helper method.
      * @param {Function} cbEach - cbEach(key:any,value:any)
      */
-    each(cbEach:Function):void {
+    public each(cbEach:Function):void {
         for (let key in this) {
             if (this.has(key)) {
                 if (cbEach(key,this[key]) === false) break;
@@ -254,7 +254,7 @@ export class Dictionary {
      * @param {Function} cbComplete - Optional - cbComplete()
      * @returns {Promise<null>}
      */
-    asyncForEach(cbIterator:Function, cbComplete:Function=null):Promise<null>  {
+    public asyncForEach(cbIterator:Function, cbComplete:Function=null):Promise<null>  {
 
         return new Promise((resolve) => {
 
