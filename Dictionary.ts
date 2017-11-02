@@ -45,7 +45,7 @@ export class Dictionary {
      */
     public entries():any {
         let self = this;
-        return {
+        return {"alert":"exposes Symbol.iterator, use with (for ... of) loop",
             [Symbol.iterator]: function*() {
                 let keys = self.getKeys();//Object.keys(this);
                 for (let key of keys) {
@@ -127,7 +127,7 @@ export class Dictionary {
     public values():Array<any> {
         let arr:Array<any> = [];
         let keys = this.getKeys();
-        for (let key in keys) {
+        for (let key of keys) {
             arr.push(this[key]);
         }
         return arr;
