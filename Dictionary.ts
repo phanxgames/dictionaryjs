@@ -4,7 +4,7 @@
  * ---------------------------------
  * Dictionary
  */
-export class Dictionary {
+export class Dictionary<TKey,TValue>  {
 
     private __private__:DictionaryInner;
 
@@ -58,16 +58,16 @@ export class Dictionary {
 
     /**
      * Checks if collection has this key.
-     * @param {any} key
+     * @param {TKey} key
      * @returns {Boolean}
      */
-    public has(key:any):Boolean {
+    public has(key:TKey):Boolean {
 
         if (key==null) return false;
         if (typeof key == "string" && key.indexOf("__private__") >= 0)
             return false;
 
-        return this.hasOwnProperty(key);
+        return this.hasOwnProperty(key as any);
 
     }
 
@@ -99,7 +99,7 @@ export class Dictionary {
      * @ignore
      * @alias getKeys()
      */
-    public keys():Array<any> {
+    public keys():Array<TKey> {
         return this.getKeys();
     }
 
@@ -122,10 +122,10 @@ export class Dictionary {
 
     /**
      * Returns values within collection
-     * @returns {Array<any>}
+     * @returns {Array<TValue>}
      */
-    public values():Array<any> {
-        let arr:Array<any> = [];
+    public values():Array<TValue> {
+        let arr:Array<TValue> = [];
         let keys = this.getKeys();
         for (let key of keys) {
             arr.push(this[key]);
@@ -135,43 +135,43 @@ export class Dictionary {
 
     /**
      * Remove the key from collection.
-     * @param {any} key
+     * @param {TKey} key
      */
-    public remove(key:any):void {
+    public remove(key:TKey):void {
         this.invalidate();
-        delete this[key];
+        delete this[(key as any)];
     }
 
     /**
      * Store value at the key.  The key has been tested with strings,
      *   but may support other types.
      * Value may be any data type.
-     * @param {any} key - key of the key/value pair
-     * @param {any} value - value of the key/value pair
+     * @param {TKey} key - key of the key/value pair
+     * @param {TValue} value - value of the key/value pair
      */
-    public set(key:any,value:any):void {
+    public set(key:TKey, value:TValue):void {
         this.invalidate();
-        this[key] = value;
+        this[(key as any)] = value;
     }
 
     /**
      * Returns the value
-     * @param {any} key
-     * @returns {any} the value
+     * @param {TKey} key
+     * @returns {TValue} the value
      */
-    public get(key:any):any {
-        return this[key];
+    public get(key:TKey):TValue {
+        return this[(key as any)];
     }
 
     /**
      * Returns the default value if key is not found or is null.
-     * @param {string} key - key to lookup
+     * @param {TKey} key - key to lookup
      * @param defaultValue - the default value
      * @returns value of key or default value
      */
-    public getDefault(key:any,defaultValue:any):any {
+    public getDefault(key:TKey, defaultValue:TValue):TValue {
         if (this.has(key)) {
-            return this[key];
+            return this[(key as any)];
         } else {
             return defaultValue;
         }
@@ -182,7 +182,7 @@ export class Dictionary {
      * This is blocking.
      */
     public empty():void {
-        this.forEach((key:any,value:any):void => {
+        this.forEach((key:TKey, value:TValue):void => {
             this.remove(key);
         })
     }
@@ -231,7 +231,7 @@ export class Dictionary {
      */
     public each(cbEach:Function):void {
         for (let key in this) {
-            if (this.has(key)) {
+            if (this.has((key as any))) {
                 if (cbEach(key,this[key]) === false) break;
             }
         }

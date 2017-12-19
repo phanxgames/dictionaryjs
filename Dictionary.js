@@ -56,7 +56,7 @@ class Dictionary {
     }
     /**
      * Checks if collection has this key.
-     * @param {any} key
+     * @param {TKey} key
      * @returns {Boolean}
      */
     has(key) {
@@ -109,7 +109,7 @@ class Dictionary {
     }
     /**
      * Returns values within collection
-     * @returns {Array<any>}
+     * @returns {Array<TValue>}
      */
     values() {
         let arr = [];
@@ -121,7 +121,7 @@ class Dictionary {
     }
     /**
      * Remove the key from collection.
-     * @param {any} key
+     * @param {TKey} key
      */
     remove(key) {
         this.invalidate();
@@ -131,8 +131,8 @@ class Dictionary {
      * Store value at the key.  The key has been tested with strings,
      *   but may support other types.
      * Value may be any data type.
-     * @param {any} key - key of the key/value pair
-     * @param {any} value - value of the key/value pair
+     * @param {TKey} key - key of the key/value pair
+     * @param {TValue} value - value of the key/value pair
      */
     set(key, value) {
         this.invalidate();
@@ -140,15 +140,15 @@ class Dictionary {
     }
     /**
      * Returns the value
-     * @param {any} key
-     * @returns {any} the value
+     * @param {TKey} key
+     * @returns {TValue} the value
      */
     get(key) {
         return this[key];
     }
     /**
      * Returns the default value if key is not found or is null.
-     * @param {string} key - key to lookup
+     * @param {TKey} key - key to lookup
      * @param defaultValue - the default value
      * @returns value of key or default value
      */
