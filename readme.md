@@ -49,6 +49,7 @@ TypeScript example:
 import {Dictionary} from "dictionaryjs";
 
 let dict:Dictionary<string,string> = new Dictionary<string,string>();
+
 </pre>
 
 
