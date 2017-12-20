@@ -48,7 +48,7 @@ TypeScript example:
 <pre>
 import {Dictionary} from "dictionaryjs";
 
-let dict:Dictionary<string,string> = new Dictionary<string,string>();
+let dict:Dictionary&lt;string,string&gt; = new Dictionary&lt;string,string&gt;();
 
 </pre>
 
