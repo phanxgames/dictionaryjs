@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Dictionary
  */
 class Dictionary {
-    constructor(cacheKeys = false) {
+    constructor(initial = null, options = null) {
         /**
          * @internal
          */
@@ -25,12 +25,16 @@ class Dictionary {
                 yield this[key];
             }
         };
+        if (initial != null) {
+            this._copyValues(initial);
+        }
+        options = options || { cacheKeys: false };
         //Make the internal data non enumerable.
         Object.defineProperty(this, "__private__", {
             value: {},
             enumerable: false
         });
-        this.__private__.cacheKeys = cacheKeys;
+        this.__private__.cacheKeys = options.cacheKeys;
         this.__private__.invalidateKeys = true;
         this.__private__.keys = null;
     }
@@ -264,6 +268,12 @@ class Dictionary {
             };
             step();
         });
+    }
+    _copyValues(initial) {
+        for (let prop in initial) {
+            if (initial.hasOwnProperty(prop))
+                this[prop] = initial[prop];
+        }
     }
 }
 exports.Dictionary = Dictionary;

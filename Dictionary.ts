@@ -8,7 +8,15 @@ export class Dictionary<TKey,TValue>  {
 
     private __private__:DictionaryInner;
 
-    constructor(cacheKeys:Boolean=false) {
+    constructor(initial:{[s:string]:TValue;}=null,
+                options:DictionaryOptions=null)
+    {
+
+        if (initial != null) {
+            this._copyValues(initial);
+        }
+
+        options = options || {cacheKeys:false};
 
         //Make the internal data non enumerable.
         Object.defineProperty(this, "__private__", {
@@ -16,7 +24,7 @@ export class Dictionary<TKey,TValue>  {
             enumerable: false
         });
 
-        this.__private__.cacheKeys = cacheKeys;
+        this.__private__.cacheKeys = options.cacheKeys;
         this.__private__.invalidateKeys = true;
         this.__private__.keys = null;
 
@@ -302,9 +310,12 @@ export class Dictionary<TKey,TValue>  {
     }
 
 
-
-
-
+    private _copyValues(initial: {[s:string]:TValue;}):void {
+        for (let prop in initial) {
+            if (initial.hasOwnProperty(prop))
+                this[prop] = initial[prop];
+        }
+    }
 }
 
 /**
@@ -314,4 +325,8 @@ interface DictionaryInner {
     cacheKeys:Boolean;
     invalidateKeys:Boolean;
     keys:Array<any>
+}
+
+export interface DictionaryOptions {
+    cacheKeys?:boolean
 }

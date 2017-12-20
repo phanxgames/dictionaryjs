@@ -6,7 +6,9 @@
  */
 export declare class Dictionary<TKey, TValue> {
     private __private__;
-    constructor(cacheKeys?: Boolean);
+    constructor(initial?: {
+        [s: string]: TValue;
+    }, options?: DictionaryOptions);
     /**
      * @internal
      */
@@ -122,4 +124,8 @@ export declare class Dictionary<TKey, TValue> {
      * @returns {Promise<null>}
      */
     asyncForEach(cbIterator: Function, cbComplete?: Function): Promise<null>;
+    private _copyValues(initial);
+}
+export interface DictionaryOptions {
+    cacheKeys?: boolean;
 }

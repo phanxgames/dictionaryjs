@@ -43,6 +43,15 @@ const Dictionary = require('dictionaryjs');
 let dict = new Dictionary();
 </pre>
 
+TypeScript example:
+
+<pre>
+import {Dictionary} from "dictionaryjs";
+
+let dict:Dictionary<string,string> = new Dictionary<string,string>();
+</pre>
+
+
 ### Set
 
 Store values to a key:
@@ -241,6 +250,14 @@ Returns an array of values:
 dict.values();
 </pre>
 
+### Initial Key/Values
+
+Declare the Dictionary to have initial key/values with the constructor:
+
+<pre>
+let dict = new Dictionary({"key":"value"});
+</pre>
+
 
 ### Caching Keys
 
@@ -249,7 +266,7 @@ An option in the constructor (defaults to false) allows you to have the keys cac
 First enable caching by passing true in the constructor:
 
 <pre>
-let dict = new Dictionary(true);
+let dict = new Dictionary(null,{cacheKeys:true});
 </pre>
 
 Then as you interact with the collection the cache will invalidate on its own as long as you use the methods built into the class.  In other words using the dot or box operators to set or delete keys will not invalidate the key cache.
