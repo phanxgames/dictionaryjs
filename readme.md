@@ -25,8 +25,8 @@ npm install dictionaryjs
 
 ### Requirements
 
-* ECMAScript 2016 (ES6)
-* Node.JS 6.x or later (tested on 6.11)
+* ECMAScript 2017 (ES2017)
+* Node.JS 8.x or later (tested on 8.1.3)
 
 See branch "classic" for earlier versions of Node.JS.
 
@@ -116,6 +116,16 @@ Check if key is in the dictionary, returns boolean.
 <pre>
 dict.has("key");
 </pre>
+
+
+### Contains
+
+Check if value is in the dictionary, returns boolean.
+
+<pre>
+dict.contains(obj);
+</pre>
+
 
 ### Empty
 

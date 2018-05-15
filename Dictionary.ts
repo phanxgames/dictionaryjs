@@ -67,9 +67,9 @@ export class Dictionary<TKey,TValue>  {
     /**
      * Checks if collection has this key.
      * @param {TKey} key
-     * @returns {Boolean}
+     * @returns {boolean}
      */
-    public has(key:TKey):Boolean {
+    public has(key:TKey):boolean {
 
         if (key==null) return false;
         if (typeof key == "string" && key.indexOf("__private__") >= 0)
@@ -78,6 +78,18 @@ export class Dictionary<TKey,TValue>  {
         return this.hasOwnProperty(key as any);
 
     }
+
+    /**
+     * Checks if the value is within the Dictionary.
+     * @param {TValue} value
+     * @returns {boolean}
+     */
+    public contains(value:TValue):boolean {
+        if (value==null) return false;
+        let values:Array<TValue> = Object.values(this);
+        return values.indexOf(value) >= 0;
+    }
+
 
 
     /**
@@ -133,12 +145,7 @@ export class Dictionary<TKey,TValue>  {
      * @returns {Array<TValue>}
      */
     public values():Array<TValue> {
-        let arr:Array<TValue> = [];
-        let keys = this.getKeys();
-        for (let key of keys) {
-            arr.push(this[key]);
-        }
-        return arr;
+        return Object.values(this);
     }
 
     /**
@@ -206,22 +213,17 @@ export class Dictionary<TKey,TValue>  {
      * Non-blocking method to remove all keys from collection.
      * @param {Function} cbComplete - cbComplete()
      */
-    public asyncEmpty(cbComplete:Function=null):Promise<null> {
+    public async asyncEmpty(cbComplete:Function=null):Promise<void> {
 
-        return new Promise(async (resolve) => {
-            await this.asyncForEach(
-                (key:any,value:any,next:Function):void =>
-                {
-                    this.remove(key);
-                    next();
-                }
-            );
-            if (cbComplete!=null)
-                cbComplete();
-            else
-                resolve();
-        });
-
+        await this.asyncForEach(
+            (key:any,value:any,next:Function):void =>
+            {
+                this.remove(key);
+                next();
+            }
+        );
+        if (cbComplete!=null)
+            cbComplete();
 
     }
 
@@ -262,7 +264,9 @@ export class Dictionary<TKey,TValue>  {
      * @param {Function} cbComplete - Optional - cbComplete()
      * @returns {Promise<null>}
      */
-    public asyncForEach(cbIterator:Function, cbComplete:Function=null):Promise<null>  {
+    public asyncForEach(cbIterator:Function,
+                              cbComplete:Function=null):Promise<null>
+    {
 
         return new Promise((resolve) => {
 
@@ -322,8 +326,8 @@ export class Dictionary<TKey,TValue>  {
  * @internal
  */
 interface DictionaryInner {
-    cacheKeys:Boolean;
-    invalidateKeys:Boolean;
+    cacheKeys:boolean;
+    invalidateKeys:boolean;
     keys:Array<any>
 }
 

@@ -26,9 +26,15 @@ export declare class Dictionary<TKey, TValue> {
     /**
      * Checks if collection has this key.
      * @param {TKey} key
-     * @returns {Boolean}
+     * @returns {boolean}
      */
-    has(key: TKey): Boolean;
+    has(key: TKey): boolean;
+    /**
+     * Checks if the value is within the Dictionary.
+     * @param {TValue} value
+     * @returns {boolean}
+     */
+    contains(value: TValue): boolean;
     /**
      * Returns number of items in collection.
      * @returns {number} c
@@ -97,7 +103,7 @@ export declare class Dictionary<TKey, TValue> {
      * Non-blocking method to remove all keys from collection.
      * @param {Function} cbComplete - cbComplete()
      */
-    asyncEmpty(cbComplete?: Function): Promise<null>;
+    asyncEmpty(cbComplete?: Function): Promise<void>;
     /**
      * @ignore
      * @alias each

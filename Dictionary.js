@@ -1,12 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Author: Henry Price
@@ -61,7 +53,7 @@ class Dictionary {
     /**
      * Checks if collection has this key.
      * @param {TKey} key
-     * @returns {Boolean}
+     * @returns {boolean}
      */
     has(key) {
         if (key == null)
@@ -69,6 +61,17 @@ class Dictionary {
         if (typeof key == "string" && key.indexOf("__private__") >= 0)
             return false;
         return this.hasOwnProperty(key);
+    }
+    /**
+     * Checks if the value is within the Dictionary.
+     * @param {TValue} value
+     * @returns {boolean}
+     */
+    contains(value) {
+        if (value == null)
+            return false;
+        let values = Object.values(this);
+        return values.indexOf(value) >= 0;
     }
     /**
      * Returns number of items in collection.
@@ -116,12 +119,7 @@ class Dictionary {
      * @returns {Array<TValue>}
      */
     values() {
-        let arr = [];
-        let keys = this.getKeys();
-        for (let key of keys) {
-            arr.push(this[key]);
-        }
-        return arr;
+        return Object.values(this);
     }
     /**
      * Remove the key from collection.
@@ -183,17 +181,13 @@ class Dictionary {
      * Non-blocking method to remove all keys from collection.
      * @param {Function} cbComplete - cbComplete()
      */
-    asyncEmpty(cbComplete = null) {
-        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            yield this.asyncForEach((key, value, next) => {
-                this.remove(key);
-                next();
-            });
-            if (cbComplete != null)
-                cbComplete();
-            else
-                resolve();
-        }));
+    async asyncEmpty(cbComplete = null) {
+        await this.asyncForEach((key, value, next) => {
+            this.remove(key);
+            next();
+        });
+        if (cbComplete != null)
+            cbComplete();
     }
     /**
      * @ignore
