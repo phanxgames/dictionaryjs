@@ -11,7 +11,7 @@ A simple dictionary wrapper for JavaScript providing hashmap functionality with 
 * Set and Get methods for accessing keys.
 * GetDefault method with default value if value is not found.
 * Remove method to remove key from collection.
-* Size method to get total key count within collection.
+* Size property to get total key count within collection.
 * Built-in forEach and asyncForEach methods for looping.
 * Empty and asyncEmpty to remove all entries from collection.
 * Has method checking if key is within collection.
@@ -104,7 +104,7 @@ delete dict["key"];
 Determine how many entries are in the dictionary, returns an integer.
 
 <pre>
-dict.size();
+dict.size;
 //--or--
 dict.length;
 </pre>
