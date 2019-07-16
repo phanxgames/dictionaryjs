@@ -96,7 +96,7 @@ export class Dictionary<TKey,TValue>  {
      * Returns number of items in collection.
      * @returns {number} c
      */
-    public size():number {
+    public get size():number {
         return this.getKeys().length;
     }
 
@@ -105,7 +105,7 @@ export class Dictionary<TKey,TValue>  {
      * @returns {number} c
      */
     public get length():number {
-        return this.size();
+        return this.size;
     }
 
     /**
@@ -156,6 +156,14 @@ export class Dictionary<TKey,TValue>  {
         this.invalidate();
         delete this[(key as any)];
     }
+
+    /**
+     * @alias remove
+     */
+    public delete(key:TKey):void {
+        this.remove(key);
+    }
+
 
     /**
      * Store value at the key.  The key has been tested with strings,
