@@ -1,5 +1,7 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Dictionary = void 0;
 /**
  * Author: Henry Price
  * Website: Phanxgames.com
@@ -11,7 +13,7 @@ class Dictionary {
         /**
          * @internal
          */
-        this[Symbol.iterator] = function* () {
+        this[_a] = function* () {
             let keys = this.getKeys(); //Object.keys(this);
             for (let key of keys) {
                 yield this[key];
@@ -77,7 +79,7 @@ class Dictionary {
      * Returns number of items in collection.
      * @returns {number} c
      */
-    size() {
+    get size() {
         return this.getKeys().length;
     }
     /**
@@ -85,7 +87,7 @@ class Dictionary {
      * @returns {number} c
      */
     get length() {
-        return this.size();
+        return this.size;
     }
     /**
      * Invalidates keys to recalculate.
@@ -128,6 +130,12 @@ class Dictionary {
     remove(key) {
         this.invalidate();
         delete this[key];
+    }
+    /**
+     * @alias remove
+     */
+    delete(key) {
+        this.remove(key);
     }
     /**
      * Store value at the key.  The key has been tested with strings,
@@ -263,6 +271,8 @@ class Dictionary {
             step();
         });
     }
+    toObject() {
+    }
     _copyValues(initial) {
         for (let prop in initial) {
             if (initial.hasOwnProperty(prop))
@@ -271,4 +281,5 @@ class Dictionary {
     }
 }
 exports.Dictionary = Dictionary;
+_a = Symbol.iterator;
 //# sourceMappingURL=Dictionary.js.map

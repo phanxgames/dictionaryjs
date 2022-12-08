@@ -12,7 +12,7 @@ export declare class Dictionary<TKey, TValue> {
     /**
      * @internal
      */
-    [Symbol.iterator]: () => IterableIterator<any>;
+    [Symbol.iterator]: () => Generator<any, void, unknown>;
     /**
      * Use to loop through key, value pairs.
      * <pre>
@@ -39,12 +39,12 @@ export declare class Dictionary<TKey, TValue> {
      * Returns number of items in collection.
      * @returns {number} c
      */
-    size(): number;
+    get size(): number;
     /**
      * Returns number of items in collection.
      * @returns {number} c
      */
-    readonly length: number;
+    get length(): number;
     /**
      * Invalidates keys to recalculate.
      */
@@ -69,6 +69,10 @@ export declare class Dictionary<TKey, TValue> {
      * @param {TKey} key
      */
     remove(key: TKey): void;
+    /**
+     * @alias remove
+     */
+    delete(key: TKey): void;
     /**
      * Store value at the key.  The key has been tested with strings,
      *   but may support other types.
@@ -129,8 +133,9 @@ export declare class Dictionary<TKey, TValue> {
      * @param {Function} cbComplete - Optional - cbComplete()
      * @returns {Promise<null>}
      */
-    asyncForEach(cbIterator: Function, cbComplete?: Function): Promise<null>;
-    private _copyValues(initial);
+    asyncForEach(cbIterator: Function, cbComplete?: Function): Promise<void>;
+    toObject(): any;
+    private _copyValues;
 }
 export interface DictionaryOptions {
     cacheKeys?: boolean;

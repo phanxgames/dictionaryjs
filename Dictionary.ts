@@ -273,7 +273,7 @@ export class Dictionary<TKey,TValue>  {
      * @returns {Promise<null>}
      */
     public asyncForEach(cbIterator:Function,
-                              cbComplete:Function=null):Promise<null>
+                              cbComplete:Function=null):Promise<void>
     {
 
         return new Promise((resolve) => {
@@ -318,6 +318,11 @@ export class Dictionary<TKey,TValue>  {
 
         });
 
+
+    }
+
+
+    public toObject():any {
 
     }
 
